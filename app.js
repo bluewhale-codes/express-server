@@ -13,7 +13,8 @@ const cookieParser = require('cookie-parser');
 
 
 app.use(cors({
-  origin: 'http://localhost:3000', // your frontend URL
+  origin: 'http://localhost:3000',
+  origin:'http://localhost:5500', // your frontend URL
   credentials: true                // ⬅️ allow cookies
 }));
 app.use(cookieParser());

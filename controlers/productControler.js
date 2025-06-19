@@ -1,9 +1,14 @@
 const Product = require("../models/Product");
 const cloudinary = require('cloudinary');
+const multer = require('multer')
+const storage = multer.memoryStorage(); // or use diskStorage for file uploads
+const upload = multer({ storage });
 
 
-exports.createProduct = catchAsyncErrors(async(req,res,next)=>{
-       let images = []
+const createProduct =async(req,res,next)=>{
+       try{
+        let images = []
+        console.log(req.body);
      
        if(typeof req.body.images === "string"){
          images.push(req.body.images);
@@ -35,4 +40,10 @@ exports.createProduct = catchAsyncErrors(async(req,res,next)=>{
         product,
         
     })
-});
+       } catch(error){
+           console.error("Error while creating User",error);
+           res.status(500).json({message:'Server Error'});
+       }
+};
+
+module.exports = {createProduct}

@@ -3,6 +3,7 @@ const app = express();
 const jwt = require('jsonwebtoken')
 const User = require('./models/User');
 const userRoutes = require('./routes/userRoutes')
+const productRoute = require('./routes/productRoute')
 const passport = require('passport');
 require('./passport'); 
 const session = require('express-session');
@@ -14,7 +15,7 @@ const cookieParser = require('cookie-parser');
 
 app.use(cors({
   origin: 'http://localhost:3000',
-  origin:'http://localhost:5500', // your frontend URL
+  origin:'http://127.0.0.1:5500', // your frontend URL
   credentials: true                // ⬅️ allow cookies
 }));
 app.use(cookieParser());
@@ -100,6 +101,7 @@ app.get('/profile', (req, res) => {
 require('dotenv').config();
 
 app.use('/api',userRoutes);
+app.use('/api',productRoute);
 
 // Sample route
 app.get('/', (req, res) => {
